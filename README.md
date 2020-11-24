@@ -11,7 +11,12 @@ this: `.../quiz_v1.0.0.html?{questions:1,question:[{name:'What is 1+1',answer:[1
 You will need Javascript/JSON knowledge if
 you want to create your own quiz.
 If you want more than one question, remember
-to include `{questions:<how many questions>,`.
-Also - the `correctAnswer` property requires
+to have the `questions` property set to the
+legit number of questions. If you have 5 questions
+and you set the `questions` property to `3`, the
+last 2 questions will be ignored. Also -
+the `correctAnswer` property requires
 the number of the answer, not the answer itself.
-Look at an example at `test/test.html`!
+Look at an example at `test/test.html` if you need
+a working example! Keep in mind - do not use
+question marks in the question names!
