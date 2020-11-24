@@ -14,3 +14,4 @@ If you want more than one question, remember
 to include `{questions:<how many questions>,`.
 Also - the `correctAnswer` property requires
 the number of the answer, not the answer itself.
+Look at an example at `test/test.html`!
