@@ -1,0 +1,74 @@
+<!--
+  By Andrey Nesterenko
+  Released on 2020-11-24 11:32
+-->
+<!doctype html>
+<html>
+  <head>
+    <title>Quiz</title>
+    <style>
+      #quizBoard {
+        border: solid black 1px;
+        position: absolute;
+        width: 90%;
+        height: 90%;
+        margin-top: 2%;
+        margin-left: 2%;
+        border-radius: 2%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='quizBoard'></div>
+    <script>
+    function init(){
+      var continueExec = 1;
+      try{
+        eval('window.testData='+decodeURI(document.location.href.split('?')[1]));
+      } catch(error){
+        var board = document.getElementById('quizBoard');
+        board.innerHTML='<h1>Invalid test data!</h1>';
+        continueExec = 0;
+      }
+      if(continueExec == 1){
+        var questionAmount = window.testData.questions;
+        var questions = {};
+        window.currentQuestion = 0;
+        for(var loop1=1;loop1<=questionAmount;loop1++){
+          eval('questions.q'+loop1+'=window.testData.question'+loop1);
+        }
+        renderQuestion(window.testData.question[window.currentQuestion].name,[window.testData.question[window.currentQuestion].answer[0],window.testData.question[window.currentQuestion].answer[1],window.testData.question[window.currentQuestion].answer[2],window.testData.question[window.currentQuestion].answer[3],window.testData.question[window.currentQuestion].answer[4],window.testData.question[window.currentQuestion].answer[5]],window.testData.question[window.currentQuestion].correctAnswer);
+      }
+    }
+    function renderQuestion(question,answers,correctAnswer){
+      window.currentQuestion += 1;
+      window.correctAnswer = correctAnswer;
+      var board = document.getElementById('quizBoard');
+      board.innerHTML='<h1>'+question+'</h1>';
+      for(var loop2=0;loop2<=answers.length-1;loop2++){
+        board.innerHTML = board.innerHTML+'<br><input type="checkbox" id="checkBox'+eval(loop2+1)+'" onclick="checkAnswer(this.id,window.currentQuestion)"></input>'+answers[loop2];
+      }
+    }
+    function checkAnswer(id,questionNumber){
+      eval('window.Question'+questionNumber+'correct = undefined');
+      if(id=='checkBox'+window.correctAnswer){
+        eval('window.Question'+questionNumber+'correct = true');
+      } else{
+        eval('window.Question'+questionNumber+'correct = false');
+      }
+      if(window.testData.questions != questionNumber){
+        renderQuestion(window.testData.question[window.currentQuestion].name,[window.testData.question[window.currentQuestion].answer[0],window.testData.question[window.currentQuestion].answer[1],window.testData.question[window.currentQuestion].answer[2],window.testData.question[window.currentQuestion].answer[3],window.testData.question[window.currentQuestion].answer[4],window.testData.question[window.currentQuestion].answer[5]],window.testData.question[window.currentQuestion].correctAnswer);
+      } else{
+          var board = document.getElementById('quizBoard');
+          board.innerHTML='<h1>Quiz results</h1>';
+          for(var loop3=0;loop3<=questionNumber-1;loop3++){
+            board.innerHTML = board.innerHTML+'<br>Question '+eval(questionNumber-loop3)+' correct: '+eval('window.Question'+eval(questionNumber-loop3)+'correct')+'.';
+          }
+        }
+    }
+    onload = function(){
+      init();
+    }
+    </script>
+  </body>
+</html>
