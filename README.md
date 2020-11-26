@@ -20,3 +20,7 @@ the number of the answer, not the answer itself.
 Look at an example at `test/test.html` if you need
 a working example! Keep in mind - do not use
 question marks in the question names!
+Also - the times on github releases for
+QuizEngine are not exact. To see the time of
+a release, see when the file quiz_v1.0.0.html was
+last modified.
