@@ -22,5 +22,5 @@ a working example! Keep in mind - do not use
 question marks in the question names!
 Also - the times on github releases for
 QuizEngine are not exact. To see the time of
-a release, see when the file quiz_v1.0.0.html was
+a release, see when the file quiz_v1.x.x.html was
 last modified.
