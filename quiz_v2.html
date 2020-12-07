@@ -9,14 +9,60 @@
         border: solid black 1px;
         position: absolute;
         width: 90%;
-        height: 90%;
+        height: 80%;
         margin-top: 2%;
         margin-left: 2%;
         border-radius: 2%;
       }
+      .title {
+        text-align: center;
+        background-color: lightgray;
+        position: fixed;
+        width: 100%;
+        border: solid black 1px;
+        border-radius: 2%;
+        top: 0%;
+      }
+      button {
+        font-family: Sans-Serif;
+        font-size: 50%;
+        border: solid black 1px;
+        background-color: #ffffff
+      }
+      body {
+        text-align: center;
+        font-family: Sans-Serif;
+        font-size: 100%;
+      }
+      .title {
+        text-align: center;
+        background-color: lightgray;
+        position: fixed;
+        width: 100%;
+        border: solid black 1px;
+        border-radius: 2%;
+        top: 0%;
+      }
+      img {
+        width: 300px;
+        border: solid black 1px;
+        border-radius: 2%;
+      }
+      iframe {
+        width: 100%;
+        height: 80%;
+        border: none;
+      }
     </style>
   </head>
   <body>
+    <div class='title'>
+      <h1><a href="/"><img style="border-radius: 20%; width: 3%; cursor: pointer;" src='logo.png'></a></img>Quizzer</h1>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <div id='quizBoard'></div>
     <script>
     function init(){
@@ -35,7 +81,11 @@
         for(var loop1=1;loop1<=questionAmount;loop1++){
           eval('questions.q'+loop1+'=window.testData.question'+loop1);
         }
-        renderQuestion(window.testData.question[window.currentQuestion].name,[window.testData.question[window.currentQuestion].answer[0],window.testData.question[window.currentQuestion].answer[1],window.testData.question[window.currentQuestion].answer[2],window.testData.question[window.currentQuestion].answer[3],window.testData.question[window.currentQuestion].answer[4],window.testData.question[window.currentQuestion].answer[5]],window.testData.question[window.currentQuestion].correctAnswer);
+        questions = [];
+        for(var _loop = 0; _loop <= window.testData.question[window.currentQuestion].answer.length-1; _loop++){
+          questions.push(window.testData.question[window.currentQuestion].answer[_loop]);
+        }
+        renderQuestion(window.testData.question[window.currentQuestion].name,questions,window.testData.question[window.currentQuestion].correctAnswer);
       }
     }
     function renderQuestion(question,answers,correctAnswer){
@@ -65,7 +115,7 @@
               correctAnswers++;
             }
           }
-          board.innerHTML = board.innerHTML+'<br>'+correctAnswers+'/'+window.testData.questions+'<br><button onclick="location.reload()">Play again</button>';
+          board.innerHTML = board.innerHTML+'<br>You got '+correctAnswers+'/'+window.testData.questions+'!<br><button onclick="location.reload()">Play again</button>';
         }
     }
     onload = function(){
